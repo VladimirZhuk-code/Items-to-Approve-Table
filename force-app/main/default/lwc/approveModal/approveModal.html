@@ -1,0 +1,23 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <div  lwc:if={reassign} class="slds-m-bottom_x-large">
+            <lightning-record-picker 
+                required
+                label="Reassign To"
+                placeholder="Search Users..."
+                object-api-name="User"
+                onchange={handlePickerChange}
+                onready={handleOnReady} >
+            </lightning-record-picker>
+        </div>
+            <span if:false={reassign} class="slds-m-bottom_none">Comments</span>
+                <lightning-textarea if:false={reassign}     
+                    value={comment} onchange={handleCommentChange}>        
+                </lightning-textarea>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <button class="slds-button slds-button_neutral" aria-label="Cancel and close"  onclick={handleClose}>Cancel</button>
+        <button disabled={disableButton} class="slds-button slds-button_brand" onclick={handleButtonAction}>{buttonAction}</button>
+    </lightning-modal-footer>
+</template>

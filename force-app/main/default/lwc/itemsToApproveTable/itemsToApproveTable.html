@@ -1,0 +1,50 @@
+<template>
+   <!-- HEADER -->
+    <div class="slds-page-header">
+        <div>
+            <lightning-button label="Refresh" title = "Refresh" data-id="refreshId" class="slds-float_right slds-m-top_xx-small" onclick={handleRefresh}></lightning-button>
+        </div>
+        <div class="slds-grid">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media slds-media_center">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:approval"  title="Items to Approve" style="background-color: #FF5D2D"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span>Approval Requests</span>
+                                    <span class="slds-page-header__title slds-truncate " title="Items to Approve">Items to Approve</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid">
+            <div class="slds-col slds-align-buttom slds-m-top_x-small">
+                <div class="slds-text-body_small">{quantity} item(s) • Sorted by Date Submitted • Filtered by requests assigned to me and my queues</div>
+                <div class="slds-text-body_small">Updated {todayHTML}</div>
+            </div>    
+        </div>
+    </div>
+    <!-- TABLE -->
+    <div class="exampleHolder">
+        <lightning-spinner if:true={isLoading} variant="brand" alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+            <div lwc:if={quantity}>
+            <lightning-datatable
+                    key-field="Id"
+                    data={data}
+                    hide-checkbox-column 
+                    show-row-number-column  
+                    onrowaction={handleRowAction}
+                    columns={columns}>
+            </lightning-datatable>
+        </div>
+        <div class="slds-box slds-theme_shade slds-align_absolute-center" lwc:else>
+            No approval requests need your attention right now.
+        </div>
+</template>
